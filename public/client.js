@@ -102,7 +102,7 @@ socket.on('start_call', async () => {
 // FUNCTIONS ==================================================================
 function joinRoom(room) {
   // 아래 InterviewCodes는, 나중에 DB에서 가져오는 것으로 변경한다. 
-  const InterviewCodes = ["132132", "258013", "488256"]
+  const InterviewCodes = ["132132", "258013", "488256", "132456"]
 
   if (room === '') {
     alert('인터뷰 코드를 입력해주세요.')
