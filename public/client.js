@@ -1,6 +1,6 @@
 // DOM elements.
 const roomSelectionContainer = document.getElementById('room-selection-container')
-const roomInput = document.getElementById('room-input')
+const roomInput = document.getElementById('room-input') // 여기에 "면접방 이름"이 들어가야 한다. 받아오지 않고 바로 넣을 수 있는가?
 const connectButton = document.getElementById('connect-button')
 
 const videoChatContainer = document.getElementById('video-chat-container')
@@ -32,7 +32,7 @@ const iceServers = {
 
 // BUTTON LISTENER ============================================================
 connectButton.addEventListener('click', () => {
-  joinRoom(roomInput.value)
+  joinRoom(roomInput.value) // 여기에 "면접방 이름"이 들어가야 한다.
 })
 
 // SOCKET EVENT CALLBACKS =====================================================
@@ -55,7 +55,6 @@ socket.on('full_room', () => {
 
   alert('The room is full, please try another one')
 })
-
 
 
 socket.on('start_call', async () => {
@@ -100,15 +99,12 @@ socket.on('start_call', async () => {
     rtcPeerConnection.addIceCandidate(candidate)
   })
 
-
-  
-
 // FUNCTIONS ==================================================================
 function joinRoom(room) {
   if (room === '') {
     alert('Please type a room ID')
   } else {
-    roomId = room
+    roomId = room // 여기에 "면접방 이름"이 들어가야 한다. 접속 페이지에서 받아오지 않고 바로 적용할 수 있는 방법은?
     socket.emit('join', room)
     showVideoConference()
   }
@@ -130,10 +126,6 @@ async function setLocalStream(mediaConstraints) {
   localStream = stream
   localVideoComponent.srcObject = stream
 }
-
-
-
-
 
 function addLocalTracks(rtcPeerConnection) {
     localStream.getTracks().forEach((track) => {
