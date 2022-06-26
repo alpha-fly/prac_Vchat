@@ -1,6 +1,6 @@
 // DOM elements.
 const roomSelectionContainer = document.getElementById('room-selection-container')
-const roomInput = document.getElementById('room-input') // 여기에 "면접방 이름"이 들어가야 한다. 받아오지 않고 바로 넣을 수 있는가?
+const roomInput = document.getElementById('room-input') 
 const connectButton = document.getElementById('connect-button')
 
 const videoChatContainer = document.getElementById('video-chat-container')
@@ -32,7 +32,7 @@ const iceServers = {
 
 // BUTTON LISTENER ============================================================
 connectButton.addEventListener('click', () => {
-  joinRoom(roomInput.value) // 여기에 "면접방 이름"이 들어가야 한다.
+  joinRoom(roomInput.value) 
 })
 
 // SOCKET EVENT CALLBACKS =====================================================
@@ -101,10 +101,17 @@ socket.on('start_call', async () => {
 
 // FUNCTIONS ==================================================================
 function joinRoom(room) {
+  // 아래 InterviewCodes는, 나중에 DB에서 가져오는 것으로 변경한다. 
+  const InterviewCodes = ["132132", "258013", "488256"]
+
   if (room === '') {
-    alert('Please type a room ID')
+    alert('인터뷰 코드를 입력해주세요.')
+
+  } else if (!InterviewCodes.includes(room)) {
+    alert('올바른 인터뷰 코드가 아닙니다.')    
+
   } else {
-    roomId = room // 여기에 "면접방 이름"이 들어가야 한다. 접속 페이지에서 받아오지 않고 바로 적용할 수 있는 방법은?
+    roomId = room 
     socket.emit('join', room)
     showVideoConference()
   }
