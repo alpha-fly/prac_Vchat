@@ -65,25 +65,15 @@ socket.on('start_call', async () => {
 
       console.log(rtcPeerConnection) // 여기서 값 제대로 안들어있음.
 
-
-      try {
       addLocalTracks(rtcPeerConnection)
       rtcPeerConnection.ontrack = setRemoteStream
       rtcPeerConnection.onicecandidate = sendIceCandidate
       await createOffer(rtcPeerConnection)
-    } catch (error) {
-      console.error(error)
-    }
-    }
 
 
+    } else if (!isRoomCreator) {
 
-  })
-  
-  socket.on('webrtc_offer', async (event) => {
-    console.log('Socket event callback: webrtc_offer')
-  
-    if (!isRoomCreator) {
+      console.log ("빡치게하네")
       rtcPeerConnection = new RTCPeerConnection(iceServers)
 
       console.log(rtcPeerConnection)
@@ -96,6 +86,24 @@ socket.on('start_call', async () => {
       console.log(rtcPeerConnection)
       await createAnswer(rtcPeerConnection)
     }
+  })
+  
+  socket.on('webrtc_offer', async (event) => {
+    console.log('Socket event callback: webrtc_offer')
+  
+    // if (!isRoomCreator) {
+    //   rtcPeerConnection = new RTCPeerConnection(iceServers)
+
+    //   console.log(rtcPeerConnection)
+
+    //   addLocalTracks(rtcPeerConnection)
+    //   rtcPeerConnection.ontrack = setRemoteStream
+    //   rtcPeerConnection.onicecandidate = sendIceCandidate
+    //   rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+
+    //   console.log(rtcPeerConnection)
+    //   await createAnswer(rtcPeerConnection)
+    // }
   })
   
   socket.on('webrtc_answer', (event) => {
