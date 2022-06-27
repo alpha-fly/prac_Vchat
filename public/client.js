@@ -96,6 +96,7 @@ socket.on('start_call', async () => {
       sdpMLineIndex: event.label,
       candidate: event.candidate,
     })
+
     console.log (candidate) // 여기까지 잘 나오고, 아래 addIceCandidate에서 uncaught syntax error
     console.log(rtcPeerConnection)
     rtcPeerConnection.addIceCandidate(candidate)    
