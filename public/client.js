@@ -21,12 +21,12 @@ let roomId
 
 // Free public STUN servers provided by Google.
 const iceServers = {
-  "iceServers": [
-    { url: 'stun:stun.l.google.com:19302' },
-    { url: 'stun:stun1.l.google.com:19302' },
-    { url: 'stun:stun2.l.google.com:19302' },
-    { url: 'stun:stun3.l.google.com:19302' },
-    { url: 'stun:stun4.l.google.com:19302' },
+  'iceServers': [
+    { 'urls' : 'stun:stun.l.google.com:19302' },
+    { 'urls' : 'stun:stun1.l.google.com:19302' },
+    { 'urls' : 'stun:stun2.l.google.com:19302' },
+    { 'urls' : 'stun:stun3.l.google.com:19302' },
+    { 'urls' : 'stun:stun4.l.google.com:19302' },
   ],
 }
 
@@ -63,6 +63,7 @@ socket.on('start_call', async () => {
     if (isRoomCreator) {
       rtcPeerConnection = new RTCPeerConnection(iceServers)
 
+      console.log(iceServers)
       console.log(rtcPeerConnection) // 여기서 값 제대로 안들어있음.
 
       addLocalTracks(rtcPeerConnection)
