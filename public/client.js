@@ -126,8 +126,13 @@ socket.on('webrtc_ice_candidate', (event) => {
   })
 
   console.log (candidate)
-  rtcPeerConnection2 = new RTCPeerConnection(iceServers)
-  rtcPeerConnection2.addIceCandidate(candidate)
+  rtcPeerConnection = new RTCPeerConnection(iceServers)
+  addLocalTracks(rtcPeerConnection)
+  rtcPeerConnection.ontrack = setRemoteStream
+  rtcPeerConnection.onicecandidate = sendIceCandidate
+  rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+  await createAnswer(rtcPeerConnection)
+  rtcPeerConnection.addIceCandidate(candidate)
   
 })
 
