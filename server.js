@@ -9,6 +9,7 @@ io.on('connection', (socket) => {
     socket.on('join', (roomId) => {
         const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
         const numberofClients = roomClients.length
+        console.log(roomClients, numberofClients)
 
         // these events are emitted only to the sender socket. 
         if (numberofClients == 0) {
