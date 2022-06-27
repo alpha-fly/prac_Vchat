@@ -5,10 +5,15 @@ const io = require('socket.io')(server)
 
 app.use('/', express.static('public'))
 
+
+let roomClients;
+let numberofClients;
+
 io.on('connection', (socket) => {
     socket.on('join', (roomId) => {
-        const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
-        const numberofClients = roomClients.length
+        // const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
+        roomClients = io.sockets.adapter.rooms[roomId] 
+        numberofClients = roomClients.length
         console.log(roomClients, numberofClients)
 
         // these events are emitted only to the sender socket. 
