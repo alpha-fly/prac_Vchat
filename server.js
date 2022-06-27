@@ -5,24 +5,20 @@ const io = require('socket.io')(server)
 
 app.use('/', express.static('public'))
 
-
-let roomClients;
-let numberofClients;
-
 io.on('connection', (socket) => {
     socket.on('join', (roomId) => {
         // const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
         // const numberofClients = roomClients.length
-        roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
-        numberofClients = roomClients.length
+        var clientsInRoom = io.sockets.adapter.rooms[roomId];
+        var numberofClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
         console.log(roomClients, numberofClients)
 
         // these events are emitted only to the sender socket. 
-        if (numberofClients == 0) {
+        if (numberofClients === 0) {
             console.log (`Creating room ${roomId} and emitting room_created socket event`)
             socket.join(roomId)
             socket.emit('room_created', roomId)
-        } else if (numberofClients == 1) {
+        } else if (numberofClients === 1) {
             console.log(`Joining room ${roomId} and emitting room_joined socket event`)
             socket.join(roomId)
             socket.emit('room_joined', roomId)            
