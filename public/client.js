@@ -63,14 +63,21 @@ socket.on('start_call', async () => {
     if (isRoomCreator) {
       rtcPeerConnection = new RTCPeerConnection(iceServers)
 
-      console.log(iceServers)
       console.log(rtcPeerConnection) // 여기서 값 제대로 안들어있음.
 
+
+      try {
       addLocalTracks(rtcPeerConnection)
       rtcPeerConnection.ontrack = setRemoteStream
       rtcPeerConnection.onicecandidate = sendIceCandidate
       await createOffer(rtcPeerConnection)
+    } catch (error) {
+      console.error(error)
     }
+    }
+
+
+
   })
   
   socket.on('webrtc_offer', async (event) => {
