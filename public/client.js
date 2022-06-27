@@ -96,7 +96,8 @@ socket.on('start_call', async () => {
       sdpMLineIndex: event.label,
       candidate: event.candidate,
     })
-    rtcPeerConnection.addIceCandidate(candidate)
+    // rtcPeerConnection.addIceCandidate(candidate)
+    rtcPeerConnection.sendIceCandidate(candidate)
   })
 
 // FUNCTIONS ==================================================================
