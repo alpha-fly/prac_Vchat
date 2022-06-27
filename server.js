@@ -9,6 +9,8 @@ io.on('connection', (socket) => {
     socket.on('join', (roomId) => {
         // const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
         // const numberofClients = roomClients.length
+        console.log(io.sockets.adapter.rooms)
+        console.log(io.sockets.adapter.rooms[roomId])
         var clientsInRoom = io.sockets.adapter.rooms[roomId];
         var numberofClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
         console.log(clientsInRoom, numberofClients)
