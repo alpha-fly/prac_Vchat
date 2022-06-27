@@ -85,6 +85,8 @@ socket.on('start_call', async () => {
       rtcPeerConnection.ontrack = setRemoteStream
       rtcPeerConnection.onicecandidate = sendIceCandidate
       rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+
+      console.log(rtcPeerConnection)
       await createAnswer(rtcPeerConnection)
     }
   })
@@ -147,6 +149,8 @@ async function setLocalStream(mediaConstraints) {
 function addLocalTracks(rtcPeerConnection) {
     localStream.getTracks().forEach((track) => {
       rtcPeerConnection.addTrack(track, localStream)
+
+      console.log(rtcPeerConnection)
     })
   }
   
