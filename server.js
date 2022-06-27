@@ -9,21 +9,25 @@ io.on('connection', (socket) => {
     socket.on('join', (roomId) => {
         // const roomClients = io.sockets.adapter.rooms[roomId] || {length:0}
         // const numberofClients = roomClients.length
-        console.log(io.sockets.adapter.rooms)
-        console.log(io.sockets.adapter.rooms[roomId])
-        var clientsInRoom = io.sockets.adapter.rooms[roomId];
-        var numberofClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
-        // console.log(clientsInRoom, numberofClients)
+        // console.log(roomClients)
+        // console.log(numberofClients)              
 
+        let numberofClients = 0;
+        if (io.sockets.adapter.rooms.has(roomId)) numberofClients = io.sockets.adapter.rooms.get(roomId).size
+        
+        console.log(numberofClients)
+        
         // these events are emitted only to the sender socket. 
         if (numberofClients === 0) {
             console.log (`Creating room ${roomId} and emitting room_created socket event`)
             socket.join(roomId)
-            socket.emit('room_created', roomId)
+            socket.emit('room_created', roomId)       
+        
         } else if (numberofClients === 1) {
             console.log(`Joining room ${roomId} and emitting room_joined socket event`)
             socket.join(roomId)
             socket.emit('room_joined', roomId)            
+        
         } else {
             console.log(`Cant join room ${roomId}, emitting full_room socket event`)
             socket.emit ('full_room', roomId)            
