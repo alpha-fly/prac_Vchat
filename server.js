@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
         // const numberofClients = roomClients.length
         var clientsInRoom = io.sockets.adapter.rooms[roomId];
         var numberofClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
-        console.log(roomClients, numberofClients)
+        console.log(clientsInRoom, numberofClients)
 
         // these events are emitted only to the sender socket. 
         if (numberofClients === 0) {
