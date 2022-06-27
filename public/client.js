@@ -62,6 +62,9 @@ socket.on('start_call', async () => {
   
     if (isRoomCreator) {
       rtcPeerConnection = new RTCPeerConnection(iceServers)
+
+      console.log(rtcPeerConnection)
+
       addLocalTracks(rtcPeerConnection)
       rtcPeerConnection.ontrack = setRemoteStream
       rtcPeerConnection.onicecandidate = sendIceCandidate
@@ -74,6 +77,9 @@ socket.on('start_call', async () => {
   
     if (!isRoomCreator) {
       rtcPeerConnection = new RTCPeerConnection(iceServers)
+
+      console.log(rtcPeerConnection)
+
       addLocalTracks(rtcPeerConnection)
       rtcPeerConnection.ontrack = setRemoteStream
       rtcPeerConnection.onicecandidate = sendIceCandidate
@@ -95,10 +101,10 @@ socket.on('start_call', async () => {
     var candidate = new RTCIceCandidate({
       sdpMLineIndex: event.label,
       candidate: event.candidate,
-    })
 
-    console.log (candidate) // 여기까지 잘 나오고, 아래 addIceCandidate에서 uncaught syntax error
-    console.log(rtcPeerConnection)
+    })    
+    console.log(rtcPeerConnection) // 얘가 undefined
+
     rtcPeerConnection.addIceCandidate(candidate)    
   })
 
