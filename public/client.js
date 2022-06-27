@@ -124,7 +124,11 @@ socket.on('webrtc_ice_candidate', (event) => {
     sdpMLineIndex: event.label,
     candidate: event.candidate,
   })
-  rtcPeerConnection.addIceCandidate(candidate)
+
+  console.log (candidate)
+  rtcPeerConnection2 = new RTCPeerConnection(iceServers)
+  rtcPeerConnection2.addIceCandidate(candidate)
+  
 })
 
 // FUNCTIONS ==================================================================
