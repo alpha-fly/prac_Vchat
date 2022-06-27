@@ -101,8 +101,10 @@ socket.on('start_call', async () => {
     var candidate = new RTCIceCandidate({
       sdpMLineIndex: event.label,
       candidate: event.candidate,
+
     })    
     console.log(rtcPeerConnection) // 얘가 undefined
+
     rtcPeerConnection.addIceCandidate(candidate)    
   })
 
