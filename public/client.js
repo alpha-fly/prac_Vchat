@@ -116,7 +116,7 @@ socket.on('webrtc_answer', (event) => {
   rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
 })
 
-socket.on('webrtc_ice_candidate', (event) => {
+socket.on('webrtc_ice_candidate', async (event) => {
   console.log('Socket event callback: webrtc_ice_candidate')
 
   // ICE candidate configuration.
